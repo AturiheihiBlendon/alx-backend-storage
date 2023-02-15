@@ -37,6 +37,15 @@ class Cache:
             return value
         return fn(value)
 
-    def det_str(self, key) -> str:
+    def det_str(self, key: str) -> str:
+        """
+        returns a str
+        """
         str_value = self._redis.get(key)
         return str_value.decode('utf-8')
+
+    def get_int(self, key) -> int:
+        """
+        returns an int
+        """
+        return self.get(key, int)

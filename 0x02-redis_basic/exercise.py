@@ -19,6 +19,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """ Decorator to store the history of inputs and
     outputs for a particular function.
@@ -60,7 +61,7 @@ def replay(method: Callable) -> None:
 
 class Cache:
     """Cache class"""
-    def __init__(self): 
+    def __init__(self):
         """initializes the Cache class."""
         self._redis = redis.Redis()
         self._redis.flushdb()
@@ -74,11 +75,11 @@ class Cache:
 
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
-            """Get data from the cache"""
-            value = self._redis.get(key)
-            if fn:
-                value = fn(value)
-            return value
+        """Get data from the cache"""
+        value = self._redis.get(key)
+        if fn:
+            value = fn(value)
+        return value
 
     def get_str(self, key: str) -> str:
         """Get a string from the cache"""
@@ -89,7 +90,7 @@ class Cache:
         """Get an int from the cache"""
         value = self._redis.get(key)
         try:
-            value =int(value.decode('utf-8'))
+            value = int(value.decode('utf-8'))
         except Exception:
             value = 0
         return value

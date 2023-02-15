@@ -44,7 +44,7 @@ class Cache:
         str_value = self._redis.get(key)
         return str_value.decode('utf-8')
 
-    def get_int(self, key) -> int:
+    def get_int(self, key) -> Union[bytes, str, int, float]:
         """
         returns an int
         """
